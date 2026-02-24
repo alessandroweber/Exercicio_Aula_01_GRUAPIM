@@ -1,0 +1,64 @@
+abstract class Pessoa {
+    protected String nome;
+    protected Data nascimento;
+
+    public Pessoa(String nome, Data nascimento) {
+        this.nome = nome;
+        this.nascimento = nascimento;
+    }
+
+    public abstract void imprimeDados();
+}
+
+class Cliente extends Pessoa {
+    private int codigo;
+
+    public Cliente(String nome, Data nascimento, int codigo) {
+        super(nome, nascimento);
+        this.codigo = codigo;
+    }
+
+    @Override
+    public void imprimeDados() {
+        System.out.println("[Cliente] Nome: " + nome + " | Nascimento: " + nascimento + " | Código: " + codigo);
+    }
+}
+
+class Funcionario extends Pessoa {
+    protected float salario;
+
+    public Funcionario(String nome, Data nascimento, float salario) {
+        super(nome, nascimento);
+        this.salario = salario;
+    }
+
+    public float calculaImposto() {
+        return salario * 0.03f; // Imposto de 3% conforme nota no diagrama
+    }
+
+    @Override
+    public void imprimeDados() {
+        System.out.printf("[Funcionário] Nome: %s | Salário: R$ %.2f | Imposto: R$ %.2f\n", 
+                          nome, salario, calculaImposto());
+    }
+}
+
+class Gerente extends Funcionario {
+    private String area;
+
+    public Gerente(String nome, Data nascimento, float salario, String area) {
+        super(nome, nascimento, salario);
+        this.area = area;
+    }
+
+    @Override
+    public float calculaImposto() {
+        return salario * 0.05f; // Imposto de 5% conforme nota no diagrama
+    }
+
+    @Override
+    public void imprimeDados() {
+        System.out.printf("[Gerente] Nome: %s | Área: %s | Salário: R$ %.2f | Imposto: R$ %.2f\n", 
+                          nome, area, salario, calculaImposto());
+    }
+}
