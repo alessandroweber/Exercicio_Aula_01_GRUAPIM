@@ -1,0 +1,49 @@
+class CadastroPessoas {
+    private Pessoa[] pessoas;
+    private int qtdAtual;
+
+    public CadastroPessoas(int capacidade) {
+        this.pessoas = new Pessoa[capacidade];
+        this.qtdAtual = 0;
+    }
+
+    public void cadastraPessoa(Pessoa pess) {
+        if (qtdAtual < pessoas.length) {
+            pessoas[qtdAtual] = pess;
+            qtdAtual++;
+        } else {
+            System.out.println("Cadastro cheio!");
+        }
+    }
+
+    public void imprimeCadastro() {
+        System.out.println("\n--- RELATÓRIO DE CADASTRO ---");
+        for (int i = 0; i < qtdAtual; i++) {
+            pessoas[i].imprimeDados();
+        }
+    }
+}
+
+public class TestaCadastro {
+    public static void main(String[] args) {
+        CadastroPessoas cadastro = new CadastroPessoas(10);
+
+        // Instanciando objetos conforme solicitado
+        Data d1 = new Data(15, 5, 1990);
+        Cliente c = new Cliente("Bráulio", d1, 1001);
+
+        Data d2 = new Data(20, 10, 1985);
+        Funcionario f = new Funcionario("Carlos Silva", d2, 3000.0f);
+
+        Data d3 = new Data(29, 4, 1973); // Exemplo baseado no seu aniversário
+        Gerente g = new Gerente("Ana Souza", d3, 8000.0f, "TI");
+
+        // Cadastrando
+        cadastro.cadastraPessoa(c);
+        cadastro.cadastraPessoa(f);
+        cadastro.cadastraPessoa(g);
+
+        // Imprimindo tudo
+        cadastro.imprimeCadastro();
+    }
+}
